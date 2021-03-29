@@ -1,5 +1,8 @@
 import classes from  './App.module.css';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import layout from './components/Layout/Layout'
+
+
 class App extends Component {
   render() {
   return (
