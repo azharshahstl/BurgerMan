@@ -7,11 +7,13 @@ class BurgerBuilder extends Component {
         return (
             <Aux>
                 <div>
-                    BurgerBuilder
+                    Burger
+                </div>
+                <div>
                     Builder controls
                 </div>
             </Aux>
         )};
 };
 
-export default BurerBuilder
+export default BurgerBuilder
