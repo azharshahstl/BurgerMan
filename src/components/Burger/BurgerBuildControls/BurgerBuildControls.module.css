@@ -1,0 +1,11 @@
+.BurgerBuildControls {
+    width: 100%;
+    background: #cf8f2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 1px #b6b3b3;
+    margin: auto;
+    padding: 10px 0;
+
+}

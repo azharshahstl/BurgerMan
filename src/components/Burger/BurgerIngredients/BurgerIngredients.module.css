@@ -63,7 +63,7 @@
     left: 64%;
     top: 50%;
     border-radius: 40%;
-    transform: rotate(10deg);
+    transform: rotate(25deg);
     box-shadow: inset -3px 0 #c9c9c9;
   }
   
@@ -76,17 +76,32 @@
     left: 150%;
     top: -130%;
     border-radius: 40%;
-    transform: rotate(90deg);
+    transform: rotate(55deg);
     box-shadow: inset 1px 3px #c9c9c9;
   }
+
+  .Ketchup {
+    width: 70%;
+    height: 1.5%;
+    margin: 2% auto;
+    background: red;
+    border-radius: 20px;
+}
+  .Mustard {
+    width: 70%;
+    height: 1.5%;
+    margin: 2% auto;
+    background: yellow;
+    border-radius: 20px;
+}
   
 
 .Meat {
     width: 80%;
     height: 8%;
     background: linear-gradient(#7f3608, #702e05);
-    margin: 2% auto;
-    border-radius: 15px;
+    margin: 1% auto;
+    border-radius: 10px;
 }
 
 .Cheese {
@@ -99,15 +114,23 @@
 
 .Lettuce {
     width: 85%;
-    height: 7%;
-    margin: 2% auto;
+    height: 3%;
+    margin: 1% auto;
     background: linear-gradient(#228c1d, #91ce50);
     border-radius: 20px;
 }
 
 .Bacon {
-    width: 80%;
-    height: 3%;
+    width: 30%;
+    height: 2%;
     background: linear-gradient(#bf3813, #c45e38);
-    margin: 2% auto;
+    margin: 1% auto;
+}
+
+.Bacon2 {
+  display: inline-block;
+  width: 30%;
+  height: 2%;
+  background: linear-gradient(#bf3813, #c45e38);
+  margin: 1%;
 }
