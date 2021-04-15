@@ -15,6 +15,9 @@ const controls = [
 const burgerBuildControls = (props) => {
     return (
         <div className={classes.BurgerBuildControls}>
+            {controls.map(control => {
+                return <BurgerBuildControl key={control.label} ingredientName={control.label} />
+            })}
 
         </div>
     )
