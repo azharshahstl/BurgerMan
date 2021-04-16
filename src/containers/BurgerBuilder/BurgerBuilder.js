@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BurgerBuildControls from '../../components/Burger/BurgerBuildControls/BurgerBuildControls';
+import Modal from '../../components/UI/Modal/Modal';
 
 const INGREDIENT_PRICES = {
     Cheese: 1.0, 
@@ -24,8 +25,25 @@ class BurgerBuilder extends Component {
             Bacon: 0, 
             HamburgerPatties: 0 
         }, 
-        totalPrice: 4
+        totalPrice: 4,
+        ableToPurchase: false
     }
+
+    updatedPurchaseState = (ingredients) => {
+        const sum = Object.keys(ingredients).map(ingred => {
+            return ingredients[ingred]
+        }).reduce((sum, el) => {
+            return sum + el
+        }, 0);
+        this.setState({ableToPurchase: (sum > 0)});
+    }
+
+    // updatePurchaseState = () => {
+    //     this.setState({ableToPurchase: (this.state.ableToPurchase > 4)})
+    // }
+    // The above method could also be used to check if the item can be purchased since the base price 
+    // starts at $4 and that is not purchaseable.  So if at least 1 item is added, the total is greater
+    // than 4 and is now purchaseable.  
 
     addIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
@@ -38,6 +56,7 @@ class BurgerBuilder extends Component {
         const newPrice = oldPrice + addedPrice;
 
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
+        this.updatedPurchaseState(updatedIngredients);
     }
 
     removeIngredientHandler =(type) => {
@@ -54,18 +73,24 @@ class BurgerBuilder extends Component {
         const newPrice = oldPrice - reducedPrice;
 
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
-
+        this.updatedPurchaseState(updatedIngredients);
     }
     render () { 
+
+        const disabledInfo = {...this.state.ingredients}
+        for (let key in disabledInfo) {
+            disabledInfo[key] = (disabledInfo[key] <= 0)
+        }
+
         return (
             <Aux>
-                <div>
+                    <Modal />
                     <Burger ingredients={this.state.ingredients} />
-                </div>
-                <div>
                     <BurgerBuildControls addIngredient={this.addIngredientHandler} 
-                    removeIngredient={this.removeIngredientHandler}/>
-                </div>
+                    removeIngredient={this.removeIngredientHandler}
+                    disabled={disabledInfo}
+                    price={this.state.totalPrice}
+                    purchasable={this.state.ableToPurchase}/>
             </Aux>
         )};
 };

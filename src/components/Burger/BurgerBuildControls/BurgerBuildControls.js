@@ -15,12 +15,16 @@ const controls = [
 const burgerBuildControls = (props) => {
     return (
         <div className={classes.BurgerBuildControls}>
+            <p>Current Price: $<strong>{props.price}</strong></p> 
+            {/* Add .fixed(2) to 'props.price' to fix the decimals to 2 places if needed */}
             {controls.map(control => {
                 return <BurgerBuildControl key={control.label}
                  ingredientName={control.label} 
                  added={() => props.addIngredient(control.type)}
-                 removed={() =>  props.removeIngredient(control.type)}/>
+                 removed={() =>  props.removeIngredient(control.type)}
+                 disabled={props.disabled[control.type]}/>
             })}
+            <button className={classes.OrderButton} disabled={!props.purchasable}>Order Now</button>
 
         </div>
     )
