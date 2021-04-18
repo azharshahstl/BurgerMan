@@ -14,7 +14,8 @@ const orderSummary = (props) => {
             <ul>
                 {summary}
             </ul>
-            <p>Continue with Checkout?</p>
+            <h3 style={{marginTop: '20px'}}>YOUR TOTAL: ${props.total}</h3>
+            <p style={{marginTop: '20px'}}>Continue with Checkout?</p>
             <Button buttonType='Success' clicked={props.purchase}>CONTINUE</Button>
             <Button buttonType='Cancel' clicked={props.cancel}>CANCEL</Button>
         </Aux>
