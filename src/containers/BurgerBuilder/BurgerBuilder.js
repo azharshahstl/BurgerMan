@@ -5,6 +5,7 @@ import BurgerBuildControls from '../../components/Burger/BurgerBuildControls/Bur
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
+
 const INGREDIENT_PRICES = {
     Cheese: 1.0, 
     HamburgerPatties: 2.0, 
