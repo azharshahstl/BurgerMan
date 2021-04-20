@@ -15,7 +15,7 @@
     text-decoration: none;
     /* (to remove the underline of the link) */
     padding: 4rem 2.5rem;
-    border-bottom: 0.25rem solid transparent;
+    border-bottom: 0.50rem solid transparent;
     /* (using 'transparent' so when 'clicked' we use the 'active' border-bottom which will put a line under it) */
     box-sizing: border-box;
     display: block; 
@@ -23,9 +23,12 @@
 }
 
 .NavigationItem:hover,
+/* (style to apply when hovering) */
 .NavigationItem:active,
+/* (style to apply when link is clicked) */
 .NavigationItem.active {
-    background-color: rgb(109, 101, 90);
-    border-bottom: 0.25px solid rgb(32, 104, 11);
+    background-color: rgb(110, 101, 89);
+    border-bottom: 0.50rem solid rgb(207, 153, 52);
     color: white;
+    /* (styles to apply when the link has an active class) */
 }
