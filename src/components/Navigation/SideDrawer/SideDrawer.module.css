@@ -1,0 +1,33 @@
+.SideDrawer {
+    top: 0; 
+    left: 0; 
+    height: 100%; 
+    position: fixed; 
+    width: 250px;
+    max-width: 75%;
+    z-index: 150;
+    background-color: white;
+    padding: 8rem 4rem;
+    box-sizing: border-box;
+    transition: transform 1.0s ease-out;
+}
+
+@media (min-width: 500px) {
+    .SideDrawer {
+        display: none
+    }
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
+}
+
+/* .Log { 
+    height: 10%;
+} */
+
+/* use the above if using the optional styling in SideDrawer Component */
