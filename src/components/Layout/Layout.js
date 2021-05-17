@@ -20,7 +20,7 @@ class Layout extends React.Component {
             //<Aux>
     <>
     <Toolbar /> 
-    <SideDrawer  closed={this.sideDrawerCloseHandler}/>
+    <SideDrawer  open = {this.state.showSideDrawer} closed={this.sideDrawerCloseHandler}/>
     <main className={classes.Content}> 
         {this.props.children}
     </main>
