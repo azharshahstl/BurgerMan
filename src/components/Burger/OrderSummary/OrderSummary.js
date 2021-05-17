@@ -4,7 +4,7 @@ import Button from '../../UI/Button/Button'
 
 class OrderSummary extends React.Component {
 
-    
+    // This could be a functional component
 
     render(){
         const summary = Object.keys(this.props.ingredients).map(ingredkey => {
