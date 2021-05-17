@@ -5,16 +5,33 @@ import classes from '../../App.module.css';
 import Toolbar from '../Navigation/Toolbar/Toolbar'
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer'
 
-const layout = ( props ) => (
-    //<Aux>
-    <>
-        <Toolbar /> 
-        <SideDrawer />
-        <main className={classes.Content}> 
-            {props.children}
-        </main>
-    </>
-    //</Aux>
-)
+// Layout started as a functional component.  It has been changed to a class component.
+class Layout extends React.Component {
 
-export default layout
+    state = {
+        showSideDrawer: true
+    }
+
+    sideDrawerCloseHandler = () => 
+    this.setState({showSideDrawer: false})
+
+    render() {
+        return (
+            //<Aux>
+    <>
+    <Toolbar /> 
+    <SideDrawer  closed={this.sideDrawerCloseHandler}/>
+    <main className={classes.Content}> 
+        {this.props.children}
+    </main>
+</>
+//</Aux>
+
+        )
+    }
+
+    
+}
+
+
+export default Layout
