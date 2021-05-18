@@ -6,7 +6,7 @@ import Backdrop from '../Backdrop/Backdrop'
 class Modal extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
-        return nextProps.showModal !== this.props.showModal
+        return nextProps.showModal !== this.props.showModal || nextProps.children !== this.props.children
     }
     // We are checking to see if the Modal changes and if it does,
     // since it wraps the OrderSummary Component, that will update.
