@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/spinner'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler.js'
 
 const INGREDIENT_PRICES = {
     Cheese: 1.0, 
@@ -19,22 +20,28 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
 
-    state = {
-        ingredients: {
-            Ketchup: 0,
-            Mustard: 0, 
-            Cheese: 0, 
-            Lettuce: 0, 
-            Bacon: 0, 
-            HamburgerPatties: 0 
-        }, 
+    state = { ingredients: null, 
         totalPrice: 4,
         ableToPurchase: false,
         purchasing: false, 
-        loading: false
+        loading: false, 
+        error: false
+    }
+
+    componentDidMount(){
+        axios.get('https://hammy-hammy-default-rtdb.firebaseio.com/ingredients.json')
+        .then(response => {
+            this.setState({ingredients: response.data})
+        })
+        .catch(error => {
+            this.setState({error: true})
+        })
+        console.log(this.state.ingredients)
     }
 
     updatedPurchaseState = (ingredients) => {
+        console.log(ingredients)
+        debugger
         const sum = Object.keys(ingredients).map(ingred => {
             return ingredients[ingred]
         }).reduce((sum, el) => {
@@ -51,7 +58,9 @@ class BurgerBuilder extends Component {
     // than 4 and is now purchaseable.  
 
     addIngredientHandler = (type) => {
+        console.log(type)
         const oldCount = this.state.ingredients[type];
+        console.log(this.state.ingredients[type])
         const updatedCount = oldCount + 1; 
         const updatedIngredients = { ...this.state.ingredients };
 
@@ -119,13 +128,28 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = (disabledInfo[key] <= 0)
         }
 
-        let orderSummary = <OrderSummary ingredients={this.state.ingredients}
-        cancel={this.cancelPurchaseHandler}
-        purchase={this.continuePurchaseHandler}
-        total={this.state.totalPrice}/>
-
+        let orderSummary = null; 
+        let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
         if (this.state.loading) {
             orderSummary = <Spinner />
+        }
+
+        if (this.state.ingredients){
+            burger = (<>
+                        <Burger ingredients={this.state.ingredients} />
+                        <BurgerBuildControls addIngredient={this.addIngredientHandler} 
+                        removeIngredient={this.removeIngredientHandler}
+                        disabled={disabledInfo}
+                        price={this.state.totalPrice}
+                        ordered={this.purchaseHandler}
+                        purchasable={this.state.ableToPurchase}/>
+                    </>)
+            orderSummary = <OrderSummary 
+                ingredients={this.state.ingredients}
+                cancel={this.cancelPurchaseHandler}
+                purchase={this.continuePurchaseHandler}
+                total={this.state.totalPrice}/>
+
         }
 
         return (
@@ -133,15 +157,10 @@ class BurgerBuilder extends Component {
                     <Modal showModal={this.state.purchasing} closeModal={this.cancelPurchaseHandler}>
                         {orderSummary}
                     </Modal>
-                    <Burger ingredients={this.state.ingredients} />
-                    <BurgerBuildControls addIngredient={this.addIngredientHandler} 
-                    removeIngredient={this.removeIngredientHandler}
-                    disabled={disabledInfo}
-                    price={this.state.totalPrice}
-                    ordered={this.purchaseHandler}
-                    purchasable={this.state.ableToPurchase}/>
+                    {burger}
+                    
             </Aux>
         )};
 };
 
-export default BurgerBuilder
+export default withErrorHandler(BurgerBuilder, axios)

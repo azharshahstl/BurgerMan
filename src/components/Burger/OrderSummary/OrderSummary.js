@@ -5,10 +5,18 @@ import Button from '../../UI/Button/Button'
 class OrderSummary extends React.Component {
 
     // This could be a functional component
+    // componentWillUpdate() {
+    //     console.log('[OrderSummary] WillUpdate');
+    // }
 
     render(){
+        console.log(this.props.ingredients)
+        
         const summary = Object.keys(this.props.ingredients).map(ingredkey => {
-            return (<li style={{listStyleType:'none'}} key={ingredkey}>{ingredkey}: {this.props.ingredients[ingredkey]}</li>)
+            return (
+            <li style={{listStyleType:'none'}} key={ingredkey}>
+                {ingredkey}: {this.props.ingredients[ingredkey]}
+            </li>)
         })
     return (
         <Aux>

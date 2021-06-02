@@ -17,7 +17,7 @@ class Modal extends React.Component {
     render(){
         return(
         <Aux>
-            <Backdrop showModal={this.props.showModal} close={this.props.closeModal}/>
+            <Backdrop show={this.props.showModal} close={this.props.closeModal}/>
             <div className={classes.Modal}
                 style={{transform: this.props.showModal ? 'translateY(0)' : 'translateY(-100vh)',
                         opacity: this.props.showModal ? '1' : '0'}}>

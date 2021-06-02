@@ -5,8 +5,9 @@ import BurgerIngredient from './BurgerIngredients/BurgerIngredients';
 
 const burger = (props) => {
 
-    let transformedArrayOfIngredients = Object.keys(props.ingredients).map(ingreKey =>{
-        return [...Array(props.ingredients[ingreKey])].map((__, i) => {
+    let transformedArrayOfIngredients = Object.keys(props.ingredients)
+    .map(ingreKey =>{
+        return [...Array(props.ingredients[ingreKey])].map(( _, i) => {
             return <BurgerIngredient key={ingreKey + i} type={ingreKey} />
         })
     }).flat();
@@ -21,5 +22,6 @@ const burger = (props) => {
         </div>
     )
 }
+
 
 export default burger;
